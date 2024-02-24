@@ -1,8 +1,8 @@
-const amIFat = false;
-const isHeFat = true;
-const isSheFat = null;
-let areYouFat;
+const player = {
+  name: "nico",
+  sayHello: function (otherName) {
+    console.log("Hello " + otherName);
+  },
+};
 
-console.log(amIFat);
-console.log(isSheFat);
-console.log(areYouFat)
+player.sayHello("nico");
