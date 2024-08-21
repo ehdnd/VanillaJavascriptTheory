@@ -1,32 +1,22 @@
-const colors = [
-  "#ef5777",
-  "#575fcf",
-  "#4bcffa",
-  "#34e7e4",
-  "#0be881",
-  "#f53b57",
-  "#3c40c6",
-  "#0fbcf9",
-  "#00d8d6",
-  "#05c46b",
-  "#ffc048",
-  "#ffdd59",
-  "#ff5e57",
-  "#d2dae2",
-  "#485460",
-  "#ffa801",
-  "#ffd32a",
-  "#ff3f34",
-];
+const clockTitle = document.querySelector(".js-clock");
 
-const button = document.querySelector("button");
-const body = document.querySelector("body");
+const getClock = () => {
+  const today = new Date();
+  const christmasEve = new Date(today.getFullYear(), 11, 25); //월은 0부터 시작
 
-const handleButtonClick = () => {
-  const chosenColor1 = colors[Math.floor(Math.random() * colors.length)];
-  const chosenColor2 = colors[Math.floor(Math.random() * colors.length)];
+  const dDayTotalMS = christmasEve - today;
+  const dDayTotalSec = Math.floor(dDayTotalMS / 1000);
+  const dDayTotalMin = Math.floor(dDayTotalSec / 60);
+  const dDayTotalHour = Math.floor(dDayTotalMin / 60);
+  const dDayTotalDate = Math.floor(dDayTotalHour / 24);
 
-  body.style.background = `linear-gradient(90deg, ${chosenColor1}, ${chosenColor2})`;
+  const dDaySec = String(dDayTotalSec - dDayTotalMin * 60).padStart(2, "0");
+  const dDayMin = String(dDayTotalMin - dDayTotalHour * 60).padStart(2, "0");
+  const dDayHour = String(dDayTotalHour - dDayTotalDate * 24).padStart(2, "0");
+  const dDayDate = String(dDayTotalDate).padStart(2, "0");
+
+  clockTitle.innerText = `${dDayDate}d : ${dDayHour}h : ${dDayMin}m : ${dDaySec}s`;
 };
 
-button.addEventListener("click", handleButtonClick);
+getClock();
+setInterval(getClock, 1000);
